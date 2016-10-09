@@ -1,0 +1,54 @@
+.bar-query{
+	vertical-align: middle;
+	height:40px;
+	line-height: 40px;
+	
+	margin:10px 20px;	
+}
+.bar-checkbox{
+	vertical-align: middle;
+	border-left:1px solid #CCC;
+	margin-left:5px;	
+}
+.bar-checkbox input[type="checkbox"]{
+	vertical-align: middle;	
+}
+
+.login-button {
+	background: #299BD7;
+	height: 30px;
+	padding:2px 10px;
+	font-size:14px;
+	border: 0px;
+	outline: none;
+	font-family: "����",Verdana, Arial,Sans;	
+	margin-left:10px;
+	color:#FFF;
+
+}
+.login-button:focus {outline:none;}
+/** FF�ض�Ч��  **/
+.login-button::-moz-focus-inner{outline:none;border-color:transparent!important;} 
+
+.login-button:hover{
+	background: #55B0DD;
+}
+
+.login-button:active{
+	background: #227DAA;
+	border: 0px;
+	outline: none;
+	
+}
+.content-div{
+	margin:20px 40px;
+}
+.content-div-left{
+	float:left;
+	border-right:solid 1px #CCC;
+	margin-left:20px;
+	width:40%; 
+}
+
+
+

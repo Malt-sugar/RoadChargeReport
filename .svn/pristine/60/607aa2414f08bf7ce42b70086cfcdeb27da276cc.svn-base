@@ -1,0 +1,110 @@
+body { 
+	margin:0 auto; 
+	font-size:12px; font-family:Verdana; line-height:1.5;
+}
+ul,dl,dd,h1,h2,h3,h4,h5,h6,form,p { 
+	padding:0; margin:0;
+	list-style: none;
+}
+a{cursor:pointer;}
+
+.panel{
+	width:96%;
+	margin-top:5px;
+	margin-left:10px;
+}
+
+.panel-item{
+	width:100%;
+	margin-top:5px;
+	border:1px solid #CCC;
+
+}
+.panel-item-title{
+	height:25px;
+	line-height: 25px;
+	background:#F2F2F2;
+	border-bottom:1px solid #CCC;
+	padding-left:10px;
+}
+.panel-item-content{
+	padding-left:10px;
+}
+.panel-item-content table{
+	font-size:12px;
+	text-align: center;
+}
+.panel-item-content table td{
+	width:80px;	
+}
+.panel-item-content-row{
+	margin:5px 0px;
+}
+
+.panel-item-content-row label{
+	margin-left:10px;
+	margin-right:2px;
+}
+.panel-item-content-row span{
+	margin-left:2px;
+	margin-right:2px;	
+}
+.panel-item-content-row-name{
+	width:100px;
+	display: inline-block;	
+}
+.panel-item-content-row > div{
+	margin-left:100px;
+	margin-top:5px;
+}
+.input-short{
+	width:50px;	
+	height:25px;
+}
+.input-common{
+	width:80px;	
+	height:25px;	
+}
+.input-long{
+	width:250px;	
+	height:25px;	
+}
+
+.bar-button{
+	text-align:center;
+	height:45px;
+	line-height:45px;
+	font-size:14px;
+	margin:10px 0px;	
+}
+.bar-button input[type=button]{
+	margin-left:10px;
+	height:100%;
+}
+.login-button {
+	background: url("../images/blue/button-login-n.png") no-repeat;
+	width: 138px;;
+	height: 34px;
+	font-size:14px;
+	border: 0px;
+	outline: none;
+	font-family: "����",Verdana, Arial,Sans;	
+	margin-top:10px;
+	color:#FFF;
+
+}
+.login-button:focus {outline:none;}
+/** FF�ض�Ч��  **/
+.login-button::-moz-focus-inner{outline:none;border-color:transparent!important;} 
+
+.login-button:hover{
+	background: url("../images/blue/button-login-f.png") no-repeat;
+}
+
+.login-button:active{
+	background: url("../images/blue/button-login-p.png") no-repeat;
+	border: 0px;
+	outline: none;
+	
+}
+

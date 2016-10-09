@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName">
+    <import resource="classpath:spring/mybatis.service.xml"/>
+	<context:property-placeholder location="classpath*:cds/jdbc.properties"/>   
+    
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jcfw.cds.driver}" />
+		<property name="url" value="${jcfw.cds.url}" />
+		<property name="username" value="${jcfw.cds.username}" />
+		<property name="password" value="${jcfw.cds.password}" />
+		<property name="initialSize" value="${jcfw.cds.initialSize}"/>
+		<property name="maxActive" value="${jcfw.cds.maxActive}"/>
+		<property name="maxWait" value="${jcfw.cds.maxWait}"/>
+		<property name="poolPreparedStatements" value="true"/>
+	</bean>
+	
+	<context:component-scan base-package="com.zjcds.xa">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+	<!-- 开启事务注解驱动 -->  
+	<tx:annotation-driven transaction-manager="transactionManager"/>  
+	<!-- 事务管理器 -->  
+	<bean id="transactionManager"  
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+		<property name="dataSource" ref="dataSource" />  
+	</bean>  
+
+</beans>

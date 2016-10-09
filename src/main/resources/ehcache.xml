@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+	<!-- 设置磁盘持久化的位置 -->
+	<diskStore path="D:/temp" /> 
+	<defaultCache maxElementsInMemory="10000" eternal="true"
+		overflowToDisk="true" />
+		
+		<cache name="logCache"
+		maxElementsInMemory="90000"
+		eternal="true" 
+		overflowToDisk="true" 
+		/>       
+</ehcache> 

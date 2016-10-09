@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="GBK"?>  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.zjcds.xa.dao.IReportTableDao"> 
+	<select id="queryExpenseRows" parameterType="HashMap"  resultType="com.zjcds.xa.bean.ExpenseRowVo">
+		select *
+		  from (select d.ld_id,
+		               t.ld,
+		               s.sf_xt_id xtid,
+		               t.xtmc,
+		               s.sf_xm_id xmid,
+		               t.xmmc,
+		               s.dw,
+		               s.jijia,
+		               t.shuliang,
+		               t.qd_zh,
+		               t.zd_zh,
+		               t.wh_lc,
+		               decode(t.tr_yxsj,null,'',substr(t.tr_yxsj,0,4)) tr_yxsj,
+		               t.nx,
+		               t.nx_tzxs,
+		               t.sd_jkxs,
+		               s.jsgs,
+		               t.fyxj,
+		               t.beizhu
+		          from expense_budget t, sf_xm_dict s, ld d
+		         where t.xtmc = s.sf_xt_name
+		           and t.xmmc = s.sf_xm_name
+		           and t.ld = d.ld_mc
+		           and d.group_id = ${groupid}
+		           and t.update_flag != 1
+		           <if test="username!=null">
+			           and t.tbr = '${username}'
+		           </if>
+		           and to_char(t.tbsj, 'YYYY') = '${year}'
+		        union all
+		        select d.ld_id,
+		               t.ld,
+		               s.sf_xt_id xtid,
+		               t.xtmc,
+		               0,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               sum(t.fyxj),
+		               null
+		          from expense_budget t, sf_xm_dict s, ld d
+		         where t.xtmc = s.sf_xt_name
+		           and t.xmmc = s.sf_xm_name
+		           and t.ld = d.ld_mc
+		           and d.group_id = ${groupid}
+		           and t.update_flag != 1
+		           <if test="username!=null">
+			           and t.tbr = '${username}'
+		           </if>
+		           and to_char(t.tbsj, 'YYYY') = '${year}'
+		         group by d.ld_id, t.ld, t.xtmc, s.sf_xt_id
+		        union all
+		        select 999,
+		               '合计',
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               null,
+		               sum(t.fyxj),
+		               null
+		          from expense_budget t
+		         where 
+		           t.update_flag != 1
+		         	<if test="username!=null">
+			           and t.tbr = '${username}'
+		           </if>
+		           and to_char(t.tbsj, 'YYYY') = '${year}')
+		 order by ld_id, xtid, xmid
+	
+	</select>
+	
+	<select id="queryReportYears" resultType="java.lang.String">
+	
+		select distinct to_char(t.tbsj,'YYYY') year from EXPENSE_BUDGET t
+		<where>
+			<if test="username!=null">
+				t.tbr = '${username}'
+			</if>
+		</where>
+		
+		order by year desc
+	
+	</select>
+	
+     
+</mapper>

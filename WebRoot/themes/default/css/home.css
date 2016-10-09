@@ -1,0 +1,93 @@
+/**   home page css file  **/
+
+.top{
+	width:100%;
+	height:40px;
+	line-height:40px;
+	background:#0099cc;
+	color:#FFF;
+}
+.top-logo-title{
+	vertical-align: middle;
+	margin-left:10px;
+	font-size:18px;
+	font-family: "����","΢���ź�","����";
+	letter-spacing: 1px;
+	width:400px;
+}
+.top-ul{
+	position:absolute;
+	right:10px;
+	top:2px;
+	margin:2px 5px;
+	font-size:12px;
+}
+.top-ul > li{
+	float:right;
+	margin-left:2px;
+	width:80px;
+	text-align: center;
+	cursor:pointer;
+}
+.content{
+	width:100%;
+	height:85%;
+	margin-top:5px;
+}
+.content-left-toc{
+	float:left;
+	width:20%;
+	height:100%;
+	margin-left:5px;
+	background:#666666;
+	text-align:center;
+}
+.content-left-toc ul{
+	margin-top:45px;
+}
+.content-left-toc li{
+	border-top:1px solid #999;
+	height:35px;
+	line-height:35px;
+	vertical-align:middle;
+	padding:2px 0px;
+	color:#EEE;
+	font-size:14px;
+	cursor:default;
+	margin:0px 10px;
+}
+.content-left-toc li:hover{
+	color:#0099cc;	
+	
+}
+
+.content-left-toc li:active{
+	color:#0099cc;
+	
+}
+.content-right-panel{
+	width:78%;
+	height:100%;
+	margin-left:21%;
+	background:#F2F2F2;	
+}
+.content-right-panel-iframe{
+	width:98%;
+	height:95%;
+	margin:10px 10px;
+	background:#FFF;
+	border:1px solid #CCC;
+}
+
+.copyright{
+	width:100%;
+	height:30px;
+	background:#F3F3F3;
+	text-align:center;
+	margin-top:5px;
+	cursor:pointer;
+}
+.copyright span{
+	margin-left:10px;
+	color:#999;	
+}

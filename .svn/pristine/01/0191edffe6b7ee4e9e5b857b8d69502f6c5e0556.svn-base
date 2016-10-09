@@ -1,0 +1,110 @@
+body{
+	
+	}
+#top{
+	width:80%;
+	color:#0099cc;
+	font-size: 40px;
+	font-weight:bold;
+	letter-spacing:4px;
+	height:20%;
+	margin-top:10px;
+	margin-left:10%;
+	margin-bottom:60px;
+}
+#top div{
+	text-align:left;
+	}
+#content{
+	width:80%;
+	height:65%;
+	vertical-align: middle;
+	margin-left:15%;
+}
+#leftimage{
+	float:left;
+	width:500px;
+	height:250px;
+	background: url("../images/login-image.png") no-repeat;
+}		
+#rightpanel{
+	margin-left:600px;
+}
+.login-textInput {
+	vertical-align:top;
+	background: url("../images/blue/input-login-n.png") no-repeat;
+	height: 45px;
+	padding-top:7px;
+	padding-bottom:6px;
+	font-size:12px;
+	width: 380px;
+	border: 0px;
+	padding-left: 10px;
+	padding-right:6px;
+	outline: none;
+	color: #999999;
+	margin-top:10px;
+}
+.login-textInput:hover {
+	background: url("../images/blue/input-login-f.png") no-repeat;
+}
+
+.login-textInput:focus {
+	background: url("../images/blue/input-login-f.png") no-repeat;
+}
+
+.login-checkbox{
+
+	height:30px;
+	line-height: 30px;
+	vertical-align: middle;
+}
+#checkbox_remember{
+	border: 0px;
+	outline: none;
+	vertical-align: middle;
+}
+#checkbox_remember:checked{outline:none;}
+#checkbox_remember::-moz-focus-inner{outline:none;border-color:transparent!important;} 
+
+
+.login-button {
+	background: url("../images/blue/button-login-n.png") no-repeat;
+	width: 138px;;
+	height: 44px;
+	font-size:14px;
+	border: 0px;
+	outline: none;
+	margin-top:10px;
+	color:#FFF;
+
+}
+.login-button:focus {outline:none;}
+.login-button::-moz-focus-inner{outline:none;border-color:transparent!important;} 
+
+.login-button:hover{
+	background: url("../images/blue/button-login-f.png") no-repeat;
+}
+
+.login-button:active{
+	background: url("../images/blue/button-login-p.png") no-repeat;
+	border: 0px;
+	outline: none;
+	
+}
+
+#copyright{
+	width:80%;
+	margin-left:10%;
+	margin-bottom:10px;
+	border-top:1px solid #ccc ;
+	padding-top:5px;
+	text-align:center;
+}
+#copyright a{
+	cursor: pointer;
+}
+.copyright-hr{
+	width:100%;
+	margin-bottom: 4px;
+}

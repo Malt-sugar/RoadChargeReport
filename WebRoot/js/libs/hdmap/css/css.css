@@ -1,0 +1,17 @@
+/* 通用 */
+body, ul, li, form, fieldset, legend, button, input, textarea, th, td{ margin:0; padding:0; border:0;}
+ul, ol { list-style:none; }
+li{ list-style:none}
+
+.bk{ width:960px; height:500px; overflow:hidden; margin:0 auto; position:relative;}
+.dhy{ width:44px; height:173px; overflow:hidden; position:absolute; z-index:10000; left:50px; top:10px;}
+.dhy_con1{ width:44px; height:44px; overflow:hidden; background:url(../images/dhy_001.png) no-repeat;}
+.dhy_con1_top{ width:10px; height:5px; overflow:hidden; margin:5px auto 0 auto; cursor:pointer;}
+.dhy_con1_s{ width:44px; overflow:hidden; margin-top:7px;}
+.dhy_con1_left{ float:left; display:block; padding-left:5px; cursor:pointer;}
+.dhy_con1_right{ float:right; display:block; padding-right:5px; cursor:pointer;}
+.dhy_con1_bottom{ width:10px; height:5px; overflow:hidden; margin:7px auto 0 auto; cursor:pointer;}
+.dhy_con2{ width:20px; overflow:hidden; margin:0 auto;}
+.dhy_con2_top{ width:20px; height:22px; overflow:hidden; margin-top:10px; cursor:pointer;}
+.dhy_con2_s{ width:20px; height:75px; overflow:hidden; background:url(../images/dhy_002.png) center top repeat-y;}
+.dhy_con2_bottom{ width:20px; height:22px; overflow:hidden; margin:0; cursor:pointer;}

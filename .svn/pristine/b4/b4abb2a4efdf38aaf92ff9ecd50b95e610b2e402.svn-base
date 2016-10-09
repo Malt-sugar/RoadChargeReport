@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.zjcds.xa.dao.IUserInfoDao">   
+	<!--  <resultMap type="com.zjcds.xa.bean.UserInfoBean" id="user_xx">   
+		<id property="USERID" column="USERID"></id>   
+		<id property="GROUPID" column="GROUPID"></id> 
+		<id property="GROUPNAME" column="GROUPNAME"></id>   
+		<id property="USERNAME" column="USERNAME"></id> 
+		<id property="LOGIN_NAME" column="LOGIN_NAME"></id>   
+		<id property="PASSWORD" column="PASSWORD"></id>    
+	</resultMap>   -->
+	
+	<select id="getUserByName" parameterType="string" resultType="com.zjcds.xa.bean.UserInfoBean">
+	    select * from user_xx where login_name=#{login_name}  </select> 
+	<!--  
+	<insert id="addUser" parameterType="user_xx">    
+	    insert into usertable(userid,username,password)  values(userid_seq.nextval,#{userName},#{password})  
+	 </insert>   
+	 <update id="updateUser" parameterType="user_xx">    
+        update usertable set username=#{userName},password=#{password}  where userid=#{userId}    
+     </update> 
+     -->
+     
+     <resultMap type="HashMap" id="groupMap">
+     	<id property="groupid" column="groupid"/>
+     	<result property="groupname" column="groupname"/>
+     </resultMap>
+     
+     <select id="getGroupInfos" parameterType="HashMap" resultMap="groupMap">
+     	select distinct t.groupid,t.groupname from USER_XX t 
+     	<where>
+     		<if test="gid==-1">
+	     		t.groupid not in(0,1)
+     		</if>
+     		<if test="gid>1">
+     			t.groupid= ${gid}
+     		</if>
+     	</where>
+     	order by t.groupid
+     
+     </select>
+     
+     
+</mapper>

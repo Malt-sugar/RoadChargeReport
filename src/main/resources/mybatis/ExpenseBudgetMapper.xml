@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="GBK"?>  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.zjcds.xa.dao.IExpenseBudgetDao"> 
+   <!--   <resultMap type="HashMap" id="expenseBudget">
+		<id column="id" property="id"/>
+		<result column="ld" property="ld"/>
+		<result column="xmmc" property="xmmc"/>
+		<result column="shuliang" property="shuliang"/>
+		<result column="qd_zh" property="qd_zh"/>
+		<result column="zd_zh" property="zd_zh"/>
+		<result column="wh_lc" property="wh_lc"/>
+		<result column="tr_yxsj" property="tr_yxsj"/>
+		<result column="nx" property="nx"/>
+		<result column="nx_tzxs" property="nx_tzxs"/>
+		<result column="sd_jkxs" property="sd_jkxs"/>
+		<result column="tbr" property="tbr"/>
+		<result column="tbsj" property="tbsj"/>
+		<result column="beizhu" property="beizhu"/>
+		<result column="xtmc" property="xtmc"/>
+		<result column="fyxj" property="fyxj"/>
+	</resultMap> -->
+    <resultMap type="HashMap" id="SfXmResult">
+		<id column="sf_xm_id" property="sf_xm_id"/>
+		<result column="sf_xm_name" property="sf_xm_name"/>
+		<result column="dw" property="dw"/>
+		<result column="jijia" property="jijia"/>
+		<result column="jsgs" property="jsgs"/>
+		<result column="beizhu" property="beizhu"/>
+		<result column="sf_xt_name" property="sf_xt_name"/>
+		<result column="SF_XT_ID" property="SF_XT_ID"/>
+	</resultMap>
+	<resultMap type="HashMap" id="sf_xs_nxResult">
+		<id column="xs_id" property="xs_id"/>
+		<result column="xs_nx" property="xs_nx"/>
+		<result column="xs" property="xs"/>
+		<result column="xs_spzt" property="xs_spzt"/>
+		<result column="yxzt" property="yxzt"/>
+	</resultMap>
+	<resultMap type="HashMap" id="sf_xs_cdResult">
+		<id column="cd_id" property="cd_id"/>
+		<result column="xs_cd" property="xs_cd"/>
+		<result column="xs" property="xs"/>
+		<result column="xs_spzt" property="xs_spzt"/>
+		<result column="yxzt" property="yxzt"/>
+	</resultMap>
+	<resultMap type="HashMap" id="ldResult">
+		<id column="ld_id" property="ld_id"/>
+		<result column="ld_mc" property="ld_mc"/>
+		<result column="GROUP_NAME" property="GROUP_NAME"/>
+		<result column="group_id" property="group_id"/>
+	</resultMap>
+	<resultMap type="HashMap" id="ldSfXmResult">
+		<id column="sf_xm_id" property="sf_xm_id"/>
+		<result column="sf_xm_name" property="sf_xm_name"/>
+		<result column="dw" property="dw"/>
+		<result column="jijia" property="jijia"/>
+		<result column="jsgs" property="jsgs"/>
+		<result column="beizhu" property="beizhu"/>
+		<result column="ld" property="ld"/>
+		<result column="tr_yxsj" property="tr_yxsj"/>
+		<result column="gz_time" property="gz_time"/>
+		<result column="sf_xt_name" property="sf_xt_name"/>
+		<result column="xmmc" property="xmmc"/>
+		<result column="sf_st_id" property="sf_st_id"/>
+	</resultMap>
+    
+    <select id="getLdByGroupid" parameterType="HashMap" resultMap="ldResult">
+	    select * from ld   
+	    <if test="groupid !=null and groupid !='' and groupid!=0">
+			    where  group_id=#{groupid}
+			    </if>
+	    
+	    </select> 
+      
+	<select id="getSfXmByParams" parameterType="String" resultMap="SfXmResult">
+	    select * from sf_xm_dict where  sf_xm_name=#{sf_xm_name}  </select> 
+	<select id="getSfXmByLd"  resultType="HashMap" parameterType="String">
+	     select * from table(sfxm_pck.getSfXmByLd(#{ld})) 
+	     <where>
+	     	jijia!=0 order by sf_st_id,sf_xm_id
+	     </where>
+	</select>     
+	<insert id="insertxssp" parameterType="HashMap">
+	    insert into XS_SP(id,sp_yj,spnf) values(SQ_XS_SP.nextval,#{sp_yj},#{spnf})
+	</insert>
+	<insert id="insertSfxsCd" parameterType="HashMap">
+	insert into sf_xs_cd
+  (cd_id, xs_cd, xs, xs_spzt, yxzt, tbsj, spsj, ysnf)
+values
+  (sq_sf_xs_cd.nextval, #{xs_cd},  #{xs},  #{xs_spzt},  #{yxzt},  #{tbsj},  #{spsj},  #{ysnf})
+	</insert>
+	<insert id="insertSfxsNx" parameterType="HashMap">
+	insert into sf_xs_nx
+  (xs_id, xs_nx, xs, xs_spzt, yxzt, tbsj, spsj, ysnf)
+values
+  (sq_sf_xs_nx.nextval, #{xs_nx},  #{xs},  #{xs_spzt},  #{yxzt},  #{tbsj},  #{spsj},  #{ysnf})
+	</insert>
+	<update id="updateSfxsCd" parameterType="HashMap">
+	update  sf_xs_cd set xs_cd=#{xs_cd},xs=#{xs},xs_spzt=#{xs_spzt},yxzt=#{yxzt},tbsj=#{tbsj},spsj=#{spsj},ysnf=#{ysnf} where cd_id=#{cd_id}
+	</update>
+	<update id="updateSfxsNx" parameterType="HashMap">
+	update  sf_xs_nx set xs_nx=#{xs_nx},xs=#{xs},xs_spzt=#{xs_spzt},yxzt=#{yxzt},tbsj=#{tbsj},spsj=#{spsj},ysnf=#{ysnf} where xs_id=#{xs_id}
+	</update>
+	<select id="selectSfXsCd_sp" resultType="HashMap" parameterType="String">
+	  select tt.*,rownum from(SELECT MAX(DECODE(t.XS_CD,&apos;β&lt;=1000&apos;,t.xs||'_'||t.CD_ID,NULL)) b1,
+		 MAX(DECODE(t.XS_CD,&apos;1000&lt;β&lt;=3000&apos;,t.xs||'_'||t.CD_ID,NULL)) b13,
+		  MAX(DECODE(t.XS_CD,&apos;3000&lt;β&apos;,t.xs||'_'||t.CD_ID,NULL)) b3,
+		  t.XS_SPZT,
+		  t.YXZT,
+		  t.YSNF,
+		  t.SPSJ,
+		  t.TBSJ
+		FROM SF_XS_CD t 
+		<if test="ysnf !=null and ysnf !=''">
+	   		where t.YSNF=#{ysnf}
+	    </if>
+		GROUP BY t.XS_SPZT,
+		  t.YXZT,
+		  t.YSNF,
+		  t.SPSJ,
+		  t.TBSJ order by ysnf desc)  tt 
+	    <if test="rownum !=null and rownum !=''">
+	   		where rownum&lt;=#{rownum}
+	    </if>
+	</select>
+	<select id="selectSfXsNx_sp" resultType="HashMap" parameterType="HashMap">
+	  select tt.*,rownum from(SELECT MAX(DECODE(t.XS_NX,&apos;1&lt;=α&lt;=2&apos;,t.xs||'_'||t.XS_ID,NULL)) a12,
+		 MAX(DECODE(t.XS_NX,&apos;3&lt;=α&lt;=5&apos;,t.xs||'_'||t.XS_ID,NULL)) a35,
+		  MAX(DECODE(t.XS_NX,&apos;6&lt;=α&lt;=8&apos;,t.xs||'_'||t.XS_ID,NULL)) a68,
+		  MAX(DECODE(t.XS_NX,&apos;9&lt;=α&apos;,t.xs||'_'||t.XS_ID,NULL)) a9,
+		  t.XS_SPZT,
+		  t.YXZT,
+		  t.YSNF,
+		  t.SPSJ,
+		  t.TBSJ
+		FROM SF_XS_NX t 
+		<if test="ysnf !=null and ysnf !=''">
+	   		where t.YSNF=#{ysnf}
+	    </if>
+		GROUP BY t.XS_SPZT,
+		  t.YXZT,
+		  t.YSNF,
+		  t.SPSJ,
+		  t.TBSJ order by ysnf desc) tt
+        <if test="rownum !=null and rownum !=''">
+	   		where rownum&lt;=#{rownum}
+	    </if>
+	</select>
+	<select id="getSfXsNx" parameterType="int" resultMap="sf_xs_nxResult">  
+	    select * from (select t.*,
+		       substr(xs_nx, 1, instr(t.xs_nx, '&lt;=', 1) - 1) smaller,
+		       (case (substr(xs_nx, instr(t.xs_nx, '&lt;=', -1) + 2, length(xs_nx)))
+		         when 'α' then
+		          '100'
+		         else
+		          (substr(xs_nx, instr(t.xs_nx, '&lt;=', -1) + 2, length(xs_nx)))
+		       end) bigger 
+		  from SF_XS_NX t where t.xs_spzt=1 and t.yxzt=1) where #{xs_nx}&gt;=smaller and #{xs_nx}&lt;=bigger
+	    
+	    </select> 
+	<select id="getSfXsCd" parameterType="int" resultMap="sf_xs_cdResult">
+	    select *
+		  from (select t.*,
+		               (to_number(case
+		                 when instr(t.XS_CD, 'β', 1) = 1 then
+		                  '0'
+		                 else
+		                  substr(XS_CD, 1, instr(t.XS_CD, '&lt;', 1, 1) - 1)
+		               end))+1 smaller,
+		               to_number(case
+		                (case instr(XS_CD, '&lt;=', 1)
+		                   when 0 then
+		                    (substr(XS_CD, instr(t.XS_CD, '&lt;', 1) + 1, length(XS_CD)))
+		                   else
+		                    (substr(XS_CD, instr(t.XS_CD, '&lt;=', 1) + 2, length(XS_CD)))
+		                 end)
+		                 when 'β' then
+		                  '100000000000'
+		                 else
+		                  (case instr(XS_CD, '&lt;=', 1)
+		                    when 0 then
+		                     (substr(XS_CD,
+		                             instr(t.XS_CD, '&lt;', 1) + 1,
+		                             length(XS_CD)))
+		                    else
+		                     (substr(XS_CD,
+		                             instr(t.XS_CD, '&lt;=', 1) + 2,
+		                             length(XS_CD)))
+		                  end)
+		               end) bigger
+		          from SF_XS_cd t
+		         where t.xs_spzt = 1
+		           and t.yxzt = 1)
+		 where #{xs_cd}&gt;= smaller
+		   and #{xs_cd}&lt;= bigger
+	    
+	    </select>  
+	<select id="getLd" parameterType="String" resultMap="ldResult">
+	    select * from ld where groupid=#{groupid}  </select> 
+	<select id="getExpenseBudgetCountByParams" parameterType="HashMap" resultType="int">
+	    select count(2) from expense_budget where tbr=#{user} and ld=#{ld} and to_char(tbsj,'yyyy')=to_char(sysdate,'yyyy')
+ 	</select> 
+	<select id="getExpenseBudgetByParams" parameterType="HashMap" resultType="com.zjcds.xa.bean.ExpenseBudgetBean">
+	    select * from expense_budget where tbr=#{user}  
+	    <if test="ld !=null and ld !=''">
+	    and ld=#{ld}
+	    </if>    
+	    <if test="tbsj !=null and tbsj !=''">
+	    and to_char(tbsj,'yyyy')=#{tbsj}
+	    </if> 
+	    <if test="sh_zt !=null and sh_zt !=''">
+	    and sh_zt=#{sh_zt,jdbcType=INTEGER}
+	    </if> 
+	</select>    
+	 <select id="getTotalExpenseBudgetByGroup"  parameterType="String" resultType="HashMap">
+		SELECT u.groupname,
+			sum(t.fyxj) as num,
+			sum(DECODE(t.xtmc, '收费系统', t.fyxj, 0)) as sfxt,
+			sum(DECODE(t.xtmc, '通信系统', t.fyxj, 0)) as txxt,
+			sum(DECODE(t.xtmc, '监控系统', t.fyxj, 0)) as jkxt,
+			sum(DECODE(t.xtmc, '供配电与照明系统', t.fyxj, 0)) as zmxt,
+			sum(DECODE(t.xtmc, '隧道系统', t.fyxj, 0)) as sdxt
+		FROM EXPENSE_BUDGET t, user_xx u 
+		<where>
+			t.tbr=u.login_name
+			<if test="tbsj !=null and tbsj !=''">
+				and to_char(t.tbsj,'yyyy')=#{tbsj}
+			</if> 
+		</where>
+		GROUP BY  u.groupname
+		
+		union
+
+		select '合计',
+		       sum(t.fyxj) as num,
+		       sum(DECODE(t.xtmc, '收费系统', t.fyxj, 0)) as sfxt,
+		       sum(DECODE(t.xtmc, '通信系统', t.fyxj, 0)) as txxt,
+		       sum(DECODE(t.xtmc, '监控系统', t.fyxj, 0)) as jkxt,
+		       sum(DECODE(t.xtmc, '供配电与照明系统', t.fyxj, 0)) as zmxt,
+		       sum(DECODE(t.xtmc, '隧道系统', t.fyxj, 0)) as sdxt
+		FROM EXPENSE_BUDGET t
+		<where>
+			<if test="tbsj !=null and tbsj !=''">
+				to_char(t.tbsj,'yyyy')=#{tbsj}
+			</if> 
+		</where>
+		
+	 </select>
+	 <select id="getExpenseBudgetTongji"  parameterType="HashMap" resultType="HashMap">
+	    select distinct to_char(t.tbsj, 'yyyy') year, t.ld ldmc, t.sh_zt sh_zt,t.update_flag,
+	    (select sum(fyxj)  from expense_budget  where xtmc = '收费系统' and ld=t.ld) sfxt,
+        (select sum(fyxj)  from expense_budget  where xtmc = '通信系统' and ld=t.ld) txxt,
+        (select sum(fyxj)  from expense_budget  where xtmc = '监控系统' and ld=t.ld) jkxt,
+         (select sum(fyxj)  from expense_budget  where xtmc = '供配电与照明系统' and ld=t.ld) zmxt,
+        (select sum(fyxj)  from expense_budget  where xtmc = '隧道系统' and ld=t.ld) sdxt
+	    
+	  	from expense_budget t,user_xx u 
+		  <where>
+		  	t.tbr = u.login_name and u.groupid=${groupid}
+              <if test="ld !=null and ld !=''">
+			    and ld=#{ld}
+			    </if>    
+			    <if test="tbsj !=null and tbsj !=''">
+			    and to_char(t.tbsj,'yyyy')=#{tbsj}
+			    </if> 
+			    <if test="sh_zt !=null and sh_zt !=''">
+			    and sh_zt=#{sh_zt,jdbcType=INTEGER}
+			    </if> 
+		  </where>
+		 group by t.ld,t.sh_zt, to_char(t.tbsj, 'yyyy'),t.update_flag  
+	 </select>
+	    <select id="getExpenseBudgetCount"  resultType="int">
+	    select count(2) from expense_budget  </select>   
+	  
+	  
+	<insert id="insertExpenseBudget" parameterType="com.zjcds.xa.bean.ExpenseBudgetBean">
+	    insert into EXPENSE_BUDGET(
+			  id,
+			  ld,
+			  shuliang ,
+			  qd_zh,
+			  zd_zh,
+			  wh_lc,
+			  tr_yxsj,
+			  nx,
+			  nx_tzxs,
+			  sd_jkxs,
+			  tbr,
+			  beizhu,
+			  tbsj,
+			  xmmc,
+			  xtmc,
+			  fyxj,
+			  update_flag,
+			  gz_time
+			)values(
+			  SQ_EXPENSE_BUDGET.Nextval,
+			  #{ld},
+			  #{shuliang} ,
+			  #{qd_zh},
+			  #{zd_zh},
+			  #{wh_lc},
+			  #{tr_yxsj},
+			  #{nx},
+			  #{nx_tzxs},
+			  #{sd_jkxs},
+			  #{tbr},
+			  #{beizhu},
+			  sysdate,
+			  #{xmmc},
+			  #{xtmc},
+			  #{fyxj},
+			  #{update_flag},
+			  #{gz_time}
+			)  
+	 </insert>   
+	 <update id="updateExpenseBudget" parameterType="HashMap">
+	    update EXPENSE_BUDGET set 
+	        ld=#{ld},
+	        shuliang=#{shuliang} ,
+	        qd_zh=#{qd_zh},
+	        zd_zh=#{zd_zh},
+	        wh_lc=#{wh_lc},
+	        tr_yxsj=#{tr_yxsj},
+	        nx=#{nx},
+	        nx_tzxs=#{nx_tzxs},
+	        sd_jkxs=#{sd_jkxs},
+	        beizhu=#{beizhu},
+	        fyxj=#{fyxj},
+	        update_flag=#{update_flag},
+	        gz_time=#{gz_time}
+         where id=#{id}    
+	 </update>
+	 <delete id="deleteExpenseBudget" parameterType="HashMap">
+	 	delete from EXPENSE_BUDGET where id=${id}
+	 </delete>
+     
+</mapper>

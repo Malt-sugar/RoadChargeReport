@@ -1,0 +1,179 @@
+.olImageLoadError {
+    display: none;
+    background-color: transparent !important;
+}
+
+/* 加载地图进度条样式 */
+ .olControlLoadingPanel {
+            background-image:url(../olapi/img/circleLoading.gif);
+            position: absolute;
+            width: 100px;
+            height:100px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            display: block;
+            z-index: 999;
+            opacity: 0.5;
+        }
+/*
+.olControlLoadingPanel {
+    background-image: url(../OpenLayers/theme/default/img/load.gif);
+    left:45%;
+    top: 45%;
+    position: absolute;
+    width: 250px;
+    height:250px;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: none;
+    z-index: 1000;
+}
+*/
+
+/*.olControlNavToolbar div {
+    display:block;
+    width:  28px;
+    height: 28px;
+    top: 300px;
+    left: 6px;
+    position: relative;
+}
+.olControlNavToolbar .olControlNavigationItemActive {
+    background-image: url("img/panning-hand-on.png");
+    background-repeat: no-repeat;
+}
+.olControlNavToolbar .olControlNavigationItemInactive {
+    background-image: url("img/panning-hand-off.png");
+    background-repeat: no-repeat;
+}*/
+.olControlAttribution {
+    right:0em;
+    bottom:0em;
+}
+
+#panel {
+    right: 0px;
+    height: 30px;
+    width: 200px;
+
+}
+#panel div {
+    float: right;
+    margin: 5px;
+    z-index: 999;
+}
+.olControlPanPanel {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+.olControlPanPanel .olControlPanNorthItemInactive {
+    left: 50%;
+    margin-left: -9px;
+    top: 0;
+}
+.olControlPanPanel .olControlPanSouthItemInactive {
+    left: 50%;
+    margin-left: -9px;
+    top: auto;
+    bottom: 0;
+}
+.olControlPanPanel .olControlPanWestItemInactive {
+    top: 50%;
+    margin-top: -9px;
+    left: 0;
+}
+.olControlPanPanel .olControlPanEastItemInactive {
+    top: 50%;
+    margin-top: -9px;
+    left: auto;
+    right: 0;
+}
+.olControlZoomPanel {
+    left: auto;
+    right: 23px;
+    top: 8px;
+}
+textarea.output {
+    text-align: left;
+    font-size: 0.9em;
+    width: 300px;
+    height: 25px;
+    float:left;
+    right:25px;
+    overflow: auto;
+}
+.info {
+  float: left;
+  width: 29%;
+  height: 100%;
+}
+.info table {
+  width: 100%;
+  text-algin: left;
+  margin: 10px;
+}
+
+.olPopupContent {
+    overflow: visible !important;
+    padding: 0 !important;
+}
+.olPopup {
+    z-index: 1005 !important;
+}
+.olwidgetPopupContent {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 1.2em 1.2em 1.2em 1.2em;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.35);
+    overflow: auto;
+    padding: 10px 8px 8px;
+}
+.olwidgetPopupCloseBox {
+    background: url("img/popup_icons.png") no-repeat scroll 0px 0 #FFFFFF;
+    cursor: pointer;
+    height: 5px;
+    overflow: hidden;
+    padding-top: 16px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 16px;
+}
+.olwidgetPopupCloseBox:hover {
+    background-position: 0px 0;
+}
+.olwidgetPopupStemTL,.olwidgetPopupStemTR {
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background: none repeat scroll 0 0 #FFFFFF;
+    z-index: 1;
+}
+
+.olwidgetPopupStemBL,.olwidgetPopupStemBR {
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background: none repeat scroll 0 0 #FFFFFF;
+    z-index: 1;
+}
+.olControlToolBar {
+	right:0px;
+	top:20px;
+	bottom:20px;
+	width:60px;
+}
+.olControlPromptBox 
+{
+	right:100px; 
+	top:10px;
+	height:200px;
+	width:150px;  
+	background-color: red;
+}
